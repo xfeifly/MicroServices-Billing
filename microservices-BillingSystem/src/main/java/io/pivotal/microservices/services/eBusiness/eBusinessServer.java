@@ -1,4 +1,4 @@
-package io.pivotal.microservices.services.recharge;
+package io.pivotal.microservices.services.eBusiness;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -6,12 +6,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableAutoConfiguration
 @EnableDiscoveryClient
-public class RechargeServer {
+public class eBusinessServer {
 	public static void main(String[] args) {
 		// Tell server to look for accounts-server.properties or
 		// accounts-server.yml
-		System.setProperty("spring.config.name", "recharge-server");
+		System.setProperty("spring.config.name", "eBusiness-server");
 
-		SpringApplication.run(RechargeServer.class, args);
+		SpringApplication.run(eBusinessServer.class, args);
 	}
 }
