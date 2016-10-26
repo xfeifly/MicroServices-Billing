@@ -26,7 +26,7 @@ import io.pivotal.microservices.accounts.AccountsConfiguration;
 public class OrderServer {
 
 	@Autowired
-	protected AccountRepository accountRepository;
+	protected AccountRepository orderRepository;
 
 	protected Logger logger = Logger.getLogger(OrderServer.class.getName());
 
