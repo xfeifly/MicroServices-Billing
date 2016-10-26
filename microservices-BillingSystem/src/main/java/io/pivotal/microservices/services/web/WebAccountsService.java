@@ -52,6 +52,8 @@ public class WebAccountsService {
 	public Account findByNumber(String accountNumber) {
 
 		logger.info("findByNumber() invoked: for " + accountNumber);
+		logger.info("WebAccountService  calling: " + serviceUrl + "/accounts/{number}");
+
 		return restTemplate.getForObject(serviceUrl + "/accounts/{number}",
 				Account.class, accountNumber);
 	}

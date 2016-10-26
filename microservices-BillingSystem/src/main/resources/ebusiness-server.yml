@@ -1,7 +1,7 @@
 # Spring properties
 spring:
   application:
-     name: eBusiness-service  # Service registers under this name
+     name: ebusiness-service  # Service registers under this name
   freemarker:
     enabled: false           # Ignore Eureka dashboard FreeMarker templates
   thymeleaf:

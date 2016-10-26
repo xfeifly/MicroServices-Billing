@@ -29,6 +29,7 @@ public class WebServer {
 	 * doesn't matter.
 	 */
 	public static final String ACCOUNTS_SERVICE_URL = "http://ACCOUNTS-SERVICE";
+	public static final String EBUSACCOUNT_SERVICE_URL = "http://EBUSINESS-SERVICE";
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -63,6 +64,13 @@ public class WebServer {
 	public WebAccountsService accountsService() {
 		return new WebAccountsService(ACCOUNTS_SERVICE_URL);
 	}
+	
+	
+	//eBusiness Service added
+	@Bean
+	public WebEBusinessAccountsService eBusAccountsService() {
+		return new WebEBusinessAccountsService(EBUSACCOUNT_SERVICE_URL);
+	}
 
 	/**
 	 * Create the controller, passing it the {@link WebAccountsService} to use.
@@ -73,7 +81,15 @@ public class WebServer {
 	public WebAccountsController accountsController() {
 		return new WebAccountsController(accountsService());
 	}
+	
+	
+	//eBusiness controller added
+	@Bean
+	public WebEBusinessAccountsController EBaccountsController() {
+		return new WebEBusinessAccountsController(eBusAccountsService());
+	}
 
+	
 	@Bean
 	public HomeController homeController() {
 		return new HomeController();

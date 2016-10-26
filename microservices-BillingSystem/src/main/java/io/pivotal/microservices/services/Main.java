@@ -11,6 +11,7 @@ import io.pivotal.microservices.services.web.WebServer;
  * 
  * @author Paul Chapman
  */
+//main function of the whole project to run each service
 public class Main {
 
 	public static void main(String[] args) {

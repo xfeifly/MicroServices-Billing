@@ -33,6 +33,7 @@ public class WebAccountsController {
 
 	public WebAccountsController(WebAccountsService accountsService) {
 		this.accountsService = accountsService;
+		
 	}
 
 	@InitBinder
@@ -93,4 +94,8 @@ public class WebAccountsController {
 			return ownerSearch(model, searchText);
 		}
 	}
+	
+	
+
+
 }
