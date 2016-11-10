@@ -24,7 +24,7 @@ public class MyOrder implements Serializable{
 	private Long id;
 	
 	@Column(name = "usrId")
-	private Long usrId;
+	private String usrId;
 	
 	private String name;
 	
@@ -56,13 +56,13 @@ public class MyOrder implements Serializable{
 	public MyOrder(String name, BigDecimal price) {
 		id = getNextId();
 		this.name = name;
-		this.usrId = -1l;
+		this.usrId = null;
 		this.price = price;
 		this.payStatus = "unpaid";
 	}
 	
 	
-	public MyOrder(long usrId, String name, BigDecimal price) {
+	public MyOrder(String usrId, String name, BigDecimal price) {
 		id = getNextId();
 		this.name = name;
 		this.usrId = usrId;
@@ -93,11 +93,11 @@ public class MyOrder implements Serializable{
 		this.id = id;
 	}
 
-	public Long getUsrId() {
+	public String getUsrId() {
 		return usrId;
 	}
 
-	public void setUsrId(Long usrId) {
+	public void setUsrId(String usrId) {
 		this.usrId = usrId;
 	}
 
