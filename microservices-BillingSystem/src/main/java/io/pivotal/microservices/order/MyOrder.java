@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "My_Order")
+@Table(name = "T_MYORDER")
 public class MyOrder implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -23,9 +23,10 @@ public class MyOrder implements Serializable{
 	@Id
 	private Long id;
 	
-	@Column(name = "usrId")
+	@Column(name = "userid")
 	private String usrId;
 	
+	@Column(name = "productname")
 	private String name;
 	
 	private BigDecimal price;

@@ -28,7 +28,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 @ComponentScan
 @EntityScan("io.pivotal.microservices.s")
 @EnableJpaRepositories("io.pivotal.microservices.s")
-@PropertySource("classpath:db-config.properties")
+@PropertySource("classpath:db-configformyorder.properties")
 public class MyOrderConfiguration {
 	protected Logger logger;
 
@@ -42,28 +42,28 @@ public class MyOrderConfiguration {
 	 */
 	@Bean
 	public DataSource dataSource() {
-		logger.info("dataSource() invoked");
+		logger.info("dataSource for my order() invoked");
 
 		// Create an in-memory H2 relational database containing some demo
 		// s.
-		DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
-				.addScript("classpath:testdb/data.sql").build();
+		DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdbformyorder/schema.sql")
+				.addScript("classpath:testdbformyorder/data.sql").build();
 
 		logger.info("dataSource = " + dataSource);
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<Map<String, Object>> s = jdbcTemplate.queryForList("SELECT number FROM T_");
+		List<Map<String, Object>> s = jdbcTemplate.queryForList("SELECT USERID FROM T_MYORDER");
 		logger.info("System has " + s.size() + " s");
 
-		// Populate with random balances
-		Random rand = new Random();
-
-		for (Map<String, Object> item : s) {
-			String number = (String) item.get("number");
-			BigDecimal balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
-			jdbcTemplate.update("UPDATE T_ SET balance = ? WHERE number = ?", balance, number);
-		}
+//		// Populate with random balances
+//		Random rand = new Random();
+//
+//		for (Map<String, Object> item : s) {
+//			String number = (String) item.get("number");
+//			BigDecimal balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
+//			jdbcTemplate.update("UPDATE T_ SET balance = ? WHERE number = ?", balance, number);
+//		}
 
 		return dataSource;
 	}

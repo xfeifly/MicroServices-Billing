@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.pivotal.microservices.accounts.Account;
+import io.pivotal.microservices.accounts.AccountRepository;
 import io.pivotal.microservices.exceptions.AccountNotFoundException;
 import io.pivotal.microservices.exceptions.MyOrderNotFoundException;
 
@@ -23,6 +24,14 @@ public class MyOrderController {
 			.getName());
 	protected MyOrderRepository myOrderRepository;
 	
+	
+	@Autowired
+	public MyOrderController(MyOrderRepository myOrderRepository) {
+		this.myOrderRepository = myOrderRepository;
+
+		logger.info("MyOrderRepository says system has "
+				+ myOrderRepository.countOrders() + " orders");
+	}
 /**
  * fetch order by orderId
  * @param orderId
@@ -67,7 +76,7 @@ public class MyOrderController {
 
 		logger.info("order-service allOrders() invoked: ");
 		List<MyOrder> myorderList = myOrderRepository.findAll();
-		logger.info("accounts-service byUsrId() found: " + myorderList);
+		logger.info("order-service byUsrId() found: " + myorderList);
 		if (myorderList == null)
 			throw new MyOrderNotFoundException();
 		else {
