@@ -26,8 +26,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
  */
 @Configuration
 @ComponentScan
-@EntityScan("io.pivotal.microservices.s")
-@EnableJpaRepositories("io.pivotal.microservices.s")
+@EntityScan("io.pivotal.microservices.order")
+@EnableJpaRepositories("io.pivotal.microservices.order")
 @PropertySource("classpath:db-configformyorder.properties")
 public class MyOrderConfiguration {
 	protected Logger logger;
