@@ -1,7 +1,7 @@
 package io.pivotal.microservices.services;
 
 import io.pivotal.microservices.services.accounts.AccountsServer;
-import io.pivotal.microservices.services.order.OrderServer;
+import io.pivotal.microservices.services.myorder.MyOrderServer;
 import io.pivotal.microservices.services.recharge.RechargeServer;
 import io.pivotal.microservices.services.registration.RegistrationServer;
 import io.pivotal.microservices.services.web.WebServer;
@@ -43,7 +43,7 @@ public class Main {
 		} else if (serverName.equals("recharge")){
 			RechargeServer.main(args);
 		}else if (serverName.equals("order")){
-			OrderServer.main(args);
+			MyOrderServer.main(args);
 		} else {
 			System.out.println("Unknown server type: " + serverName);
 			usage();

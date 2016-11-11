@@ -31,6 +31,7 @@ public class MyOrder implements Serializable{
 	
 	private BigDecimal price;
 	
+	@Column(name = "paystatus")
 	private String payStatus;//"unpaid" "paid" "processing"
 	
 	/**

@@ -1,4 +1,4 @@
-package io.pivotal.microservices.services.order;
+package io.pivotal.microservices.services.myorder;
 
 
 import java.util.logging.Logger;
@@ -9,8 +9,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
-import io.pivotal.microservices.accounts.AccountRepository;
-import io.pivotal.microservices.accounts.AccountsConfiguration;
+
+import io.pivotal.microservices.order.MyOrderConfiguration;
+import io.pivotal.microservices.order.MyOrderRepository;
 
 /**
  * Run as a micro-service, registering with the Discovery Server (Eureka).
@@ -22,13 +23,13 @@ import io.pivotal.microservices.accounts.AccountsConfiguration;
  */
 @EnableAutoConfiguration
 @EnableDiscoveryClient
-@Import(AccountsConfiguration.class)
-public class OrderServer {
+@Import(MyOrderConfiguration.class)//BUG
+public class MyOrderServer {
 
 	@Autowired
-	protected AccountRepository orderRepository;
+	protected MyOrderRepository orderRepository;//BUG
 
-	protected Logger logger = Logger.getLogger(OrderServer.class.getName());
+	protected Logger logger = Logger.getLogger(MyOrderServer.class.getName());
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -41,6 +42,6 @@ public class OrderServer {
 		// order-server.yml
 		System.setProperty("spring.config.name", "order-server");
 
-		SpringApplication.run(OrderServer.class, args);
+		SpringApplication.run(MyOrderServer.class, args);
 	}
 }

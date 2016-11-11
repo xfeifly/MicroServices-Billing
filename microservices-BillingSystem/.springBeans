@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.7.3.201602250914-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.8.1.201607290748-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+		<config>java:io.pivotal.microservices.services.myorder.MyOrderServer</config>
 	</configs>
 	<autoconfigs>
 		<config>java:io.pivotal.microservices.services.registration.RegistrationServer</config>
+		<config>java:io.pivotal.microservices.accounts.AccountsMain</config>
+		<config>java:io.pivotal.microservices.services.recharge.RechargeServer</config>
 		<config>java:io.pivotal.microservices.services.web.WebServer</config>
 		<config>java:io.pivotal.microservices.services.accounts.AccountsServer</config>
-		<config>java:io.pivotal.microservices.accounts.AccountsConfiguration</config>
 	</autoconfigs>
 	<configSets>
 		<configSet>
