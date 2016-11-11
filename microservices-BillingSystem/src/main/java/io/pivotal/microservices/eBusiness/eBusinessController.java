@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.discovery.converters.Auto;
+
 import io.pivotal.microservices.exceptions.AccountNotFoundException;
 
 
@@ -19,8 +21,13 @@ public class eBusinessController {
 			.getName());
 	protected HashMap<Integer, Integer> testMap;
 	
-	public eBusinessController() {
+	protected EbusAccountRepository ebusAccountRepository; 
+	
+	@Autowired
+	public eBusinessController(EbusAccountRepository ebusAccountRepository) {
 		this.testMap = new HashMap<Integer, Integer>();
+		this.ebusAccountRepository = ebusAccountRepository;
+		
 		Random rand = new Random();
 		for(int i  = 0; i < 10; i++){
 			testMap.put(1230 + i, rand.nextInt(1000));
@@ -35,13 +42,14 @@ public class eBusinessController {
 
 		logger.info("eBusinessAccounts-service byNumber() invoked: " + accountNumber);
 		
-		eBusAccount ebtest = new eBusAccount();
+		eBusAccount ebtest = ebusAccountRepository.findByNumber(accountNumber);
 		
-		ebtest.setId((long)1);
-		ebtest.setOwner("Jerry");
-		ebtest.setNumber("1231");
-		Random rand = new Random();
-		ebtest.balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
+//		eBusAccount ebtest = new eBusAccount();
+//		ebtest.setId((long)1);
+//		ebtest.setOwner("Jerry");
+//		ebtest.setNumber("1231");
+//		Random rand = new Random();
+//		ebtest.balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
 		
 //		int balance = testMap.get(Integer.valueOf(accountNumber));
 		

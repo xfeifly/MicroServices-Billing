@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@Table(name = "E_ACCOUNT")
 public class eBusAccount implements Serializable{
 	
 	private static final long serialVersionUID = 2L;
@@ -20,7 +21,7 @@ public class eBusAccount implements Serializable{
 
 	protected String number;
 	
-//	@Column(name = "name")
+	@Column(name = "name")
 	protected String owner;
 	
 	protected BigDecimal balance;
