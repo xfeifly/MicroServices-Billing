@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class eBusAccount {
 	
 	protected Long id;
-	protected String number;
+	protected String enumber;
+	protected String idnumber;
 	protected String owner;
 	protected BigDecimal balance;
 	
@@ -30,11 +31,11 @@ public class eBusAccount {
 		this.id = id;
 	}
 	public String getNumber() {
-		return number;
+		return enumber;
 	}
 
 	protected void setNumber(String accountNumber) {
-		this.number = accountNumber;
+		this.enumber = accountNumber;
 	}
 
 	public String getOwner() {
@@ -56,7 +57,7 @@ public class eBusAccount {
 
 	@Override
 	public String toString() {
-		return number + " [" + owner + "]: $" + balance;
+		return enumber + " [" + owner + "]: $" + balance;
 	}
 
 }

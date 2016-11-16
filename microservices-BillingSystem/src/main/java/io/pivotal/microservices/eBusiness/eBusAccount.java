@@ -19,11 +19,16 @@ public class eBusAccount implements Serializable{
 	@Id
 	protected Long id;
 
-	protected String number;
+	@Column(name = "enumber")
+	protected String enumber;
+	
+	@Column(name = "idnumber")
+	protected String idnumber;
 	
 	@Column(name = "name")
 	protected String owner;
 	
+	@Column(name = "balance")
 	protected BigDecimal balance;
 	
 	
@@ -37,9 +42,10 @@ public class eBusAccount implements Serializable{
 		balance = BigDecimal.ZERO;
 	}
 
-	public eBusAccount(String number, String owner) {
+	public eBusAccount(String enumber, String idnumber, String owner) {
 		id = getNextId();
-		this.number = number;
+		this.enumber = enumber;
+		this.idnumber = idnumber;
 		this.owner = owner;
 		balance = BigDecimal.ZERO;
 	}
@@ -59,11 +65,11 @@ public class eBusAccount implements Serializable{
 	}
 
 	public String getNumber() {
-		return number;
+		return enumber;
 	}
 
 	protected void setNumber(String accountNumber) {
-		this.number = accountNumber;
+		this.enumber = accountNumber;
 	}
 
 	public String getOwner() {
@@ -89,6 +95,6 @@ public class eBusAccount implements Serializable{
 
 	@Override
 	public String toString() {
-		return number + " [" + owner + "]: $" + balance;
+		return "ID: " + idnumber + " " + enumber + " [" + owner + "]: $" + balance;
 	}
 }

@@ -13,7 +13,7 @@ public class AccountsControllerTests extends AbstractAccountControllerTests {
 	protected static class TestAccountRepository implements AccountRepository {
 
 		@Override
-		public Account findByNumber(String accountNumber) {
+		public Account findByIdnumber(String accountNumber) {
 			if (accountNumber.equals(ACCOUNT_1))
 				return theAccount;
 			else

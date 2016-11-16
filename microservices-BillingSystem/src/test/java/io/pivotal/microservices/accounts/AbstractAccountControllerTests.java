@@ -11,7 +11,7 @@ import io.pivotal.microservices.exceptions.AccountNotFoundException;
 
 public abstract class AbstractAccountControllerTests {
 
-	protected static final String ACCOUNT_1 = "123456789";
+	protected static final String ACCOUNT_1 = "1234";
 	protected static final String ACCOUNT_1_NAME = "Keri Lee";
 	private static Logger LOGGER = Logger.getLogger("InfoLogging");
 

@@ -17,7 +17,7 @@ public interface AccountRepository extends Repository<Account, Long> {
 	 * @param accountNumber
 	 * @return The account if found, null otherwise.
 	 */
-	public Account findByNumber(String accountNumber);
+	public Account findByIdnumber(String accountNumber);
 
 	/**
 	 * Find accounts whose owner name contains the specified string

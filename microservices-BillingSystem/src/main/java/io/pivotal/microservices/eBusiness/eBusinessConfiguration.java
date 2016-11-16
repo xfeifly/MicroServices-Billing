@@ -42,16 +42,16 @@ public class eBusinessConfiguration {
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<Map<String, Object>> accounts = jdbcTemplate.queryForList("SELECT number FROM E_ACCOUNT");
+		List<Map<String, Object>> accounts = jdbcTemplate.queryForList("SELECT enumber FROM E_ACCOUNT");
 		logger.info("System has " + accounts.size() + " Ebusiness accounts");
 
 		// Populate with random balances
 		Random rand = new Random();
 
 		for (Map<String, Object> item : accounts) {
-			String number = (String) item.get("number");
+			String number = (String) item.get("enumber");
 			BigDecimal balance = new BigDecimal(10000).setScale(2, BigDecimal.ROUND_HALF_UP);
-			jdbcTemplate.update("UPDATE E_ACCOUNT SET balance = ? WHERE number = ?", balance, number);
+			jdbcTemplate.update("UPDATE E_ACCOUNT SET balance = ? WHERE enumber = ?", balance, number);
 		}
 
 		return dataSource;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.pivotal.microservices.exceptions.AccountNotFoundException;
+import io.pivotal.microservices.exceptions.*;
 
 /**
  * A RESTFul controller for accessing account information.
@@ -49,7 +49,7 @@ public class AccountsController {
 	public Account byNumber(@PathVariable("accountNumber") String accountNumber) {
 
 		logger.info("accounts-service byNumber() invoked: " + accountNumber);
-		Account account = accountRepository.findByNumber(accountNumber);
+		Account account = accountRepository.findByIdnumber(accountNumber);
 		logger.info("accounts-service byNumber() found: " + account);
 
 		if (account == null)

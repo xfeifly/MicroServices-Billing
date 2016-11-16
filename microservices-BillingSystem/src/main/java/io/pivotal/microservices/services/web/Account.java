@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Account {
 
 	protected Long id;
-	protected String number;
+	protected String idnumber;
 	protected String owner;
 	protected BigDecimal balance;
 
@@ -39,11 +39,11 @@ public class Account {
 	}
 
 	public String getNumber() {
-		return number;
+		return idnumber;
 	}
 
 	protected void setNumber(String accountNumber) {
-		this.number = accountNumber;
+		this.idnumber = accountNumber;
 	}
 
 	public String getOwner() {
@@ -65,7 +65,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return number + " [" + owner + "]: $" + balance;
+		return idnumber + " [" + owner + "]: $" + balance;
 	}
 
 }

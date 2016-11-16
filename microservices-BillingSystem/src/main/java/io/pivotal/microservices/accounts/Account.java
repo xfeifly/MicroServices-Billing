@@ -25,7 +25,7 @@ public class Account implements Serializable {
 	@Id
 	protected Long id;
 
-	protected String number;
+	protected String idnumber;
 
 	@Column(name = "name")
 	protected String owner;
@@ -54,7 +54,7 @@ public class Account implements Serializable {
 
 	public Account(String number, String owner) {
 		id = getNextId();
-		this.number = number;
+		this.idnumber = number;
 		this.owner = owner;
 		balance = BigDecimal.ZERO;
 	}
@@ -74,11 +74,11 @@ public class Account implements Serializable {
 	}
 
 	public String getNumber() {
-		return number;
+		return idnumber;
 	}
 
 	protected void setNumber(String accountNumber) {
-		this.number = accountNumber;
+		this.idnumber = accountNumber;
 	}
 
 	public String getOwner() {
@@ -103,7 +103,7 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return number + " [" + owner + "]: $" + balance;
+		return idnumber + " [" + owner + "]: $" + balance;
 	}
 
 }
