@@ -5,10 +5,11 @@ package io.pivotal.microservices.order;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
-import io.pivotal.microservices.accounts.Account;
+
 
 
 
@@ -21,10 +22,13 @@ public interface MyOrderRepository extends Repository<MyOrder, Long>{
 	
 	public MyOrder findByid(Long orderId);
 	
-	public List<MyOrder> findByusrId(String userId);
+	public List<MyOrder> findByUsrId(String userId);
 	
 	public List<MyOrder> findAll();
 	
-	public List<Account> findByNameContainingIgnoreCase(String partialName);
+	@Modifying
+	@Query("update MyOrder myor set myor.usrId = ?1 where myor.usrId = '100000000'")
+	public int setFixedUserIdFor(String usrId);
+
 
 }
