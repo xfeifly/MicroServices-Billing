@@ -33,13 +33,17 @@ public class MyOrderService {
 				: "http://" + serviceUrl;
 	}
 	
+	public MyOrderService() {
+		logger.info("MyOrderService() in MyOrderService invoked: for usrId:");
+	}
+	
 	//contatenating a url to make a httprequest
 	public boolean payOrder(String usrId, BigDecimal price ) {
 		
 		logger.info("payOrder() in MyOrderService invoked: for usrId:" +
 				usrId + " price:" + price);
 		
-		String url = "http://localhost:9000/payorder/{usrId}";       
+		String url = "http://localhost:2223/payorder/{usrId}";      //URL 
 //	    String accountId = 2l;
 //	    String requestBody = "{\"status\":\"testStatus2\"}";
 	    String requestBody1 = "{\"usrId\":" + usrId + "," + "\"price\":" + price + "}";
