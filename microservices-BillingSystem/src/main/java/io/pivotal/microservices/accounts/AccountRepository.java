@@ -1,5 +1,6 @@
 package io.pivotal.microservices.accounts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,7 @@ public interface AccountRepository extends Repository<Account, Long> {
 	 */
 	public Account findByIdnumber(String accountNumber);
 
+	public ArrayList<Account> findAll();
 	/**
 	 * Find accounts whose owner name contains the specified string
 	 * 

@@ -1,5 +1,6 @@
 package io.pivotal.microservices.accounts;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.pivotal.microservices.eBusiness.EbusAccountRepository;
+import io.pivotal.microservices.eBusiness.eBusAccount;
 import io.pivotal.microservices.exceptions.*;
 
 /**
@@ -21,6 +24,7 @@ public class AccountsController {
 	protected Logger logger = Logger.getLogger(AccountsController.class
 			.getName());
 	protected AccountRepository accountRepository;
+	//protected EbusAccountRepository EbusAccountRepository;
 
 	/**
 	 * Create an instance plugging in the respository of Accounts.
@@ -59,6 +63,18 @@ public class AccountsController {
 		}
 	}
 
+	
+	
+	@RequestMapping("/accounts/showAll")
+	public ArrayList<Account> findAll() throws Exception{
+		logger.info("finAll() method in AccountController is invoked!");
+		ArrayList<Account> allrets = accountRepository.findAll();
+		if (allrets == null)
+			throw new Exception();
+		else {
+			return allrets;
+		}
+ 	}
 	/**
 	 * Fetch accounts with the specified name. A partial case-insensitive match
 	 * is supported. So <code>http://.../accounts/owner/a</code> will find any
