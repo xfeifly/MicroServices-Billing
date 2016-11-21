@@ -34,6 +34,12 @@ public class AccountsControllerTests extends AbstractAccountControllerTests {
 		public int countAccounts() {
 			return 1;
 		}
+
+		@Override
+		public ArrayList<Account> findAll() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
 	protected TestAccountRepository testRepo = new TestAccountRepository();
