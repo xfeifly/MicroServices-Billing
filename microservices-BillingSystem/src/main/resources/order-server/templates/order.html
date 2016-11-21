@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Order Details</h1>
+
+	<dl class="dl-horizontal">
+		<dt>Order Id</dt>
+		<dd th:text="${order.id}">number</dd>
+		<dt>User Id</dt>
+		<dd th:text="${order.usrId}">number</dd>
+		<dt>Product name</dt>
+		<dd th:text="${order.name}">number</dd>
+		<dt>Price</dt>
+		<dd th:text="${order.price}">number</dd>
+		<dt>Payment Status</dt>
+		<dd th:text="${order.payStatus}">number</dd>
+	</dl>
+
+	<div style="height: 2cm">&nbsp;</div>
+
+	<div style="text-align: right">
+		Options: <a th:href="@{/}">Home</a> | <a
+			th:href="@{/orders/frontend/all}">Account Search</a>
+	</div>
+
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>All the orders</h1>
+	<div th:if="not ${orders}" class="error">
+		No Orders found containing.
+		<div style="height: 2cm">&nbsp;</div>
+	</div>
+
+	<div th:if="${orders}">
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Order Id</th>
+					<th>User Id</th>
+					<th>Product Name</th>
+					<th>Price</th>
+					<th>Pay Status</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="order : ${orders}">
+					<td><a href="order.html"
+						th:href="@{|/orders/frontend/${order.id}|}"
+						th:text="|${order.id}|">11111111</a></td>
+					<td th:text="${order.usrId}">Nobody</td>
+					<td th:text="${order.name}">Unknown</td>
+					<td th:text="${order.price}">0.0</td>
+					<td th:text="${order.payStatus}">Unpaid</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="text-align: right">
+		Options: <a th:href="@{/}">Home</a> | <a
+			th:href="@{/orders/frontend/all}">All orders</a>
+	</div>
+
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>

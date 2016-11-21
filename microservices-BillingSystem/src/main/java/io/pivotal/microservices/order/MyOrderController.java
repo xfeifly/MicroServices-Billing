@@ -6,18 +6,24 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.pivotal.microservices.exceptions.MyOrderNotFoundException;
+import io.pivotal.microservices.services.web.Account;
 import io.pivotal.microservices.services.web.eBusAccount;
 
 
 
 
-@RestController//BUG
+@Controller//BUG
 public class MyOrderController {
 	
 	protected Logger logger = Logger.getLogger(MyOrderController.class
@@ -35,6 +41,40 @@ public class MyOrderController {
 				+ myOrderRepository.countOrders() + " orders");
 	}
 	
+	//play with frontend
+	/*
+	 * 
+	 */
+	@RequestMapping("/orders/frontend/all")
+	public String allOrdersFrontend(Model model) {
+		logger.info("order-service allOrdersFrontend() invoked: ");
+		List<MyOrder> myorderList = myOrderRepository.findAll();
+		logger.info("order-service allOrdersFrontend() found: " + myorderList);
+		
+		if (myorderList.size() != 0)
+			model.addAttribute("orders", myorderList);
+		return "orders";
+	}
+	
+	
+	@RequestMapping("/orders/frontend/{orderId}")
+	public String findByOrderFrontend(Model model,@PathVariable("orderId") Long orderId) {
+		logger.info("order-service findByOrderFrontend invoked: " + orderId);
+		MyOrder myorder = myOrderRepository.findByid(orderId);
+		logger.info("order-service findByOrderFrontend found: " + myorder);
+
+		if (myorder != null)
+			model.addAttribute("order", myorder);
+		return "order";
+	}
+	
+	/*
+	 * 
+	 */
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.setAllowedFields("accountNumber", "searchText");
+	}
 	
 /**
  * fetch order by orderId
@@ -42,6 +82,7 @@ public class MyOrderController {
  * @return
  */
 	@RequestMapping("/orders/{orderId}")
+	@ResponseBody
 	public MyOrder byOrderId(@PathVariable("orderId") Long orderId) {
 
 		logger.info("order-service byOrderId() invoked: " + orderId);
@@ -53,6 +94,7 @@ public class MyOrderController {
 		else {
 			return myorder;
 		}
+		
 	}
 	
 	/**
@@ -61,6 +103,7 @@ public class MyOrderController {
 	 * @return
 	 */
 	@RequestMapping("/orders/users/{usrId}")
+	@ResponseBody
 	public List<MyOrder> byUsrId(@PathVariable("usrId") String usrId) {
 
 		logger.info("order-service byUsrId() invoked: " + usrId);
@@ -75,6 +118,7 @@ public class MyOrderController {
 	}
 	
 	@RequestMapping("/orders/all")
+	@ResponseBody
 	public List<MyOrder> allOrders() {
 		logger.info("order-service allOrders() invoked: ");
 		List<MyOrder> myorderList = myOrderRepository.findAll();
