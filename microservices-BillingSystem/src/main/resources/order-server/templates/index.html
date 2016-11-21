@@ -9,10 +9,10 @@
 
 	<p>MyOrder Server Microservice is running.</p>
 
-	<p>
+	<!-- <p>
 		This account should exist: <a href="/orders/123456789">123456789</a>.
 		Look in <code>data.sql</code> to see the rest
-	</p>
+	</p> -->
 
 	<h3>Spring Boot URLs</h3>
 	<p>For those interested, Spring Boot provides RESTful URLs for
@@ -23,11 +23,11 @@
 			href="http://localhost:1111">http://localhost:1111</a></li>
 		<li>Check applications registered: <a
 			href="http://localhost:1111/eureka/apps/">http://localhost:1111/eureka/apps/</a></li>
-		<li>Fetch account #123456789: <a th:href="@{/accounts/123456789}">/accounts/123456789</a></li>
+		<li>Fetch all orders: <a th:href="@{/orders/all}">/orders/all</a></li>
 
-		<li>Fetch by name: <a th:href="@{/accounts/owner/Keri}">/accounts/owner/Keri</a></li>
+		<li>Fetch orders by userId: <a th:href="@{/orders/users/1234}">/orders/user/1234</a></li>
 
-		<li>Account <a th:href="@{/accounts/search}">Search</a></li>
+		<li>Pay by orderId <a th:href="@{/orders/pay/1}">Search</a></li>
 	</ul>
 	
 	<ul>
