@@ -18,7 +18,7 @@ import io.pivotal.microservices.order.MyOrderConfiguration;
 import io.pivotal.microservices.order.MyOrderController;
 import io.pivotal.microservices.order.MyOrderRepository;
 import io.pivotal.microservices.order.MyOrderService;
-import io.pivotal.microservices.services.web.WebAccountsController;
+
 
 /**
  * Run as a micro-service, registering with the Discovery Server (Eureka).

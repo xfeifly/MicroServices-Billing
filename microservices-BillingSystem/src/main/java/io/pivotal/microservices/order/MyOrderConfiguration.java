@@ -4,12 +4,10 @@ package io.pivotal.microservices.order;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -45,7 +43,6 @@ public class MyOrderConfiguration {
 		logger.info("dataSource for my order() invoked");
 
 		// Create an in-memory H2 relational database containing some demo
-		// s.
 		DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdbformyorder/schema.sql")
 				.addScript("classpath:testdbformyorder/data.sql").build();
 
@@ -56,14 +53,7 @@ public class MyOrderConfiguration {
 		List<Map<String, Object>> s = jdbcTemplate.queryForList("SELECT USERID FROM T_MYORDER");
 		logger.info("System has " + s.size() + " s");
 
-//		// Populate with random balances
-//		Random rand = new Random();
-//
-//		for (Map<String, Object> item : s) {
-//			String number = (String) item.get("number");
-//			BigDecimal balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
-//			jdbcTemplate.update("UPDATE T_ SET balance = ? WHERE number = ?", balance, number);
-//		}
+
 
 		return dataSource;
 	}

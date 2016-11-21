@@ -115,9 +115,11 @@ public class MyOrderController {
 		boolean result = myOrderService.payOrder(usrId, price);
 		
 		if (result) {
-			logger.info("order-service payOrder() succeed: " + orderId);
+			logger.info("order-service payOrder() succeed: " + orderId +" has been paid");
+			myOrderRepository.updateStatusToPaid(orderId);
 		} else {
-			logger.info("order-service payOrder() failed: " + orderId);
+			logger.info("order-service payOrder() failed: " + orderId + " not paid");
+			myOrderRepository.updateStatusToUnsuccessful(orderId);
 		}
 		
 	}
