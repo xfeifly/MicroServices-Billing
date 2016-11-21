@@ -30,5 +30,11 @@ public interface EbusAccountRepository extends Repository<eBusAccount, Long>{
     @Query("UPDATE eBusAccount eb SET eb.balance = :balance WHERE eb.enumber = :enumber")
     public int updateEbusAccount(@Param("enumber") String enumber, @Param("balance") BigDecimal balance);
 	
+	@Modifying
+	@Transactional
+    @Query("UPDATE eBusAccount eb SET eb.balance = :balance WHERE eb.idnumber = :idnumber")
+    public int updateEbusAccountById(@Param("idnumber") String enumber, @Param("balance") BigDecimal balance);
+	
+	
 
 }

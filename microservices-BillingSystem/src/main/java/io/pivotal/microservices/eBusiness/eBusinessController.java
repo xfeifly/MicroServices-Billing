@@ -1,6 +1,7 @@
 package io.pivotal.microservices.eBusiness;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -47,6 +48,8 @@ public class eBusinessController {
 //				+ testMap.size() + " eBusiness accounts");
 	}
 	
+	
+	//find eBaccount by eB number
 	@RequestMapping("/eBusinessAccount/{eBusAccountNumber}")
 	public eBusAccount byNumber(@PathVariable("eBusAccountNumber") String accountNumber) {
 
@@ -68,6 +71,7 @@ public class eBusinessController {
 		}
 	}
 	
+	//find aB account by Id number
 	@RequestMapping("/eBusinessAccount/findById/{IdNumber}")
 	public eBusAccount byIdNumber(@PathVariable("IdNumber") String IdNumber) {
 
@@ -89,6 +93,7 @@ public class eBusinessController {
 		}
 	}
 	
+	//find all eB account
 	@RequestMapping("/eBusinessAccount/findAll")
 	public ArrayList<eBusAccount> findAll() throws Exception {
 
@@ -102,7 +107,7 @@ public class eBusinessController {
 //		ebtest.setNumber("1231");
 //		Random rand = new Random();
 //		ebtest.balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);				
-		logger.info("eBusinessAccounts-service byENumber() found: " + ebtest);
+		//logger.info("eBusinessAccounts-service byENumber() found: " + ebtest);
 		if (ebtest == null)
 			throw new Exception();
 		else {
@@ -110,20 +115,39 @@ public class eBusinessController {
 		}
 	}
 	
+	//updata ebusiness account balance
 	@RequestMapping("/eBusinessAccount/updata/{eBusinessNumber}")
 	public eBusAccount updataDB(@PathVariable("eBusinessNumber") String EBNumber){
 		BigDecimal newBalance = new BigDecimal(5);
 		ebusAccountRepository.updateEbusAccount(EBNumber, newBalance);
-		
 		eBusAccount ebtest = ebusAccountRepository.findByIdnumber(EBNumber); 
 		return ebtest;
 	}
 	
-	//pay order
+	//API for myOrderService: pay the order
 	@RequestMapping(value = "/eBusinessAccount/payorder/{userId}", method = RequestMethod.PUT)
 	public ResponseEntity<String> tryToPay(@PathVariable("userId") String userId, @RequestBody HashMap<String, String> input){
-		logger.info("eBusiness service received:" + userId + input.get("prices"));
-		return 	new ResponseEntity<String>("this is a string", HttpStatus.OK);
+		logger.info("eBusiness service received:" + "ID: "+ input.get("userId") + "price: " + input.get("prices"));
+		String id = input.get("userId");
+		String price = input.get("prices");
+		eBusAccount ebtest = ebusAccountRepository.findByIdnumber(id);
+		if(ebtest != null){
+			BigDecimal orderprice = new BigDecimal(price);
+			int ret = ebtest.getBalance().compareTo(orderprice); //first value: balance; second value: orderprice
+			if(ret == 2){ // balance not enough
+				logger.info("balance not enough!");
+				return new ResponseEntity<String>("Balance is not enough!", HttpStatus.BAD_REQUEST);
+			}else{ // updata database
+				MathContext mc = new MathContext(2);
+				BigDecimal newBalance = ebtest.getBalance().subtract(orderprice, mc);
+				logger.info("");
+				ebusAccountRepository.updateEbusAccountById(id, newBalance);
+			}
+		}else{
+				return new ResponseEntity<String>("User ID does not exists!", HttpStatus.BAD_REQUEST);
+		}
+		
+		return 	new ResponseEntity<String>("order payment success!", HttpStatus.OK);
 	}
 	
 }

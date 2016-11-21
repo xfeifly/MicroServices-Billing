@@ -57,13 +57,13 @@ public class AccountsConfiguration {
 		logger.info("System has " + accounts.size() + " accounts");
 
 		// Populate with random balances
-		Random rand = new Random();
-
-		for (Map<String, Object> item : accounts) {
-			String number = (String) item.get("idnumber");
-			BigDecimal balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
-			jdbcTemplate.update("UPDATE T_ACCOUNT SET balance = ? WHERE idnumber = ?", balance, number);
-		}
+//		Random rand = new Random();
+//
+//		for (Map<String, Object> item : accounts) {
+//			String number = (String) item.get("idnumber");
+//			BigDecimal balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
+//			jdbcTemplate.update("UPDATE T_ACCOUNT SET balance = ? WHERE idnumber = ?", balance, number);
+//		}
 
 		return dataSource;
 	}
