@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.client.RestTemplate;
 
 import io.pivotal.microservices.accounts.AccountRepository;
 import io.pivotal.microservices.accounts.AccountsConfiguration;
@@ -22,6 +26,7 @@ import io.pivotal.microservices.accounts.AccountsConfiguration;
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @Import(AccountsConfiguration.class)
+@Configuration
 public class AccountsServer {
 
 	@Autowired
@@ -41,5 +46,11 @@ public class AccountsServer {
 		System.setProperty("spring.config.name", "accounts-server");
 
 		SpringApplication.run(AccountsServer.class, args);
+	}
+	
+	@LoadBalanced
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 }

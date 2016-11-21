@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import io.pivotal.microservices.eBusiness.EbusAccountRepository;
 import io.pivotal.microservices.eBusiness.eBusAccount;
@@ -21,6 +27,10 @@ import io.pivotal.microservices.exceptions.*;
 @RestController
 public class AccountsController {
 
+	@Autowired
+	@LoadBalanced
+	protected RestTemplate restTemplate;
+	
 	protected Logger logger = Logger.getLogger(AccountsController.class
 			.getName());
 	protected AccountRepository accountRepository;
@@ -49,6 +59,7 @@ public class AccountsController {
 	 * @throws AccountNotFoundException
 	 *             If the number is not recognised.
 	 */
+	
 	@RequestMapping("/accounts/{accountNumber}")
 	public Account byNumber(@PathVariable("accountNumber") String accountNumber) {
 
@@ -62,25 +73,60 @@ public class AccountsController {
 			return account;
 		}
 	}
+	
+	
+	@RequestMapping("/accounts/showEBusiness/{accountNumber}")
+	public eBusAccount showEBAccount(@PathVariable("accountNumber") String accountNumber) {
 
+		logger.info("accounts-service showEBAccountbyNumber() invoked: " + accountNumber);
+		eBusAccount account = restTemplate.getForObject("http://EBUSINESS-SERVICE" + "/eBusinessAccount/findById/{accountNumber}",
+				eBusAccount.class, accountNumber);
+
+		if (account == null)
+			throw new AccountNotFoundException(accountNumber);
+		else {
+			return account;
+		}
+	}
+	
 	
 	
 	@RequestMapping("/accounts/showAll")
-	public ArrayList<Account> findAll() throws Exception{
-		logger.info("finAll() method in AccountController is invoked!");
+	public eBusAccount[] showAllEBAccounts() throws Exception{
+		logger.info("showAllEBAccounts() method in AccountController is invoked!");
 		
-
+		String ebusFindAllURL = "http://EBUSINESS-SERVICE" + "/eBusinessAccount/findAll";
+		ResponseEntity<eBusAccount[]> responseEntity = restTemplate.getForEntity(ebusFindAllURL, eBusAccount[].class);
+		eBusAccount[] eBAccounts = responseEntity.getBody();
 		
+		logger.info("try to find all the eBusAccounts from eBusiness Service" + eBAccounts);
 		
-		ArrayList<Account> allrets = accountRepository.findAll();
+		MediaType contentType = responseEntity.getHeaders().getContentType();
+		HttpStatus statusCode = responseEntity.getStatusCode();
 		
-		
-		if (allrets == null)
+		if (eBAccounts == null)
 			throw new Exception();
 		else {
-			return allrets;
+			return eBAccounts;
 		}
  	}
+	
+	@RequestMapping("/accounts/showAllOrders")
+	public MyOrder[] showAllOrderInfo() throws Exception{
+		logger.info("showAllOrderInfo() method in AccountController is invoked!");
+		String ebusFindAllURL = "http://ORDER-SERVICE" + "/orders/all";
+		ResponseEntity<MyOrder[]> responseEntity = restTemplate.getForEntity(ebusFindAllURL, MyOrder[].class);
+		MyOrder[] orderInfo = responseEntity.getBody();
+		logger.info("try to find all the order history from MyOrder Service" + orderInfo);
+		
+		MediaType contentType = responseEntity.getHeaders().getContentType();
+		HttpStatus statusCode = responseEntity.getStatusCode();
+		if (orderInfo == null)
+			throw new Exception();
+		else {
+			return orderInfo;
+		}
+	}
 	
 	/**
 	 * Fetch accounts with the specified name. A partial case-insensitive match
