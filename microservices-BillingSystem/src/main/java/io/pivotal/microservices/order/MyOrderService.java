@@ -15,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import io.pivotal.microservices.services.web.Account;
-import io.pivotal.microservices.services.web.WebAccountsService;
-import io.pivotal.microservices.services.web.eBusAccount;
 
 @Service
 public class MyOrderService {
