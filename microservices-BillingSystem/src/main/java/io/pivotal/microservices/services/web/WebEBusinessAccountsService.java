@@ -37,17 +37,18 @@ public class WebEBusinessAccountsService {
 	}
 	
 	
-	public eBusAccount findByNumber(String EBaccountNumber) {
-		logger.info("findByNumber() invoked: for " + EBaccountNumber);
-//		eBusAccount ebtest = new eBusAccount();
-//		ebtest.number = "1231";
-//		ebtest.owner = "Tommy";
-//		Random rand = new Random();
-//		ebtest.balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
-//		return ebtest;
-		logger.info("WebEBusinessAccountService  calling: " + "http://EBUSINESS-SERVICE" + "/eBusinessAccount/{number}");
-		return restTemplate.getForObject("http://EBUSINESS-SERVICE" + "/eBusinessAccount/{number}",
-				eBusAccount.class, "1231");
+	public eBusAccount findByNumber(String IdNumber) {
+		logger.info("findByNumber() invoked: for " + IdNumber);
+		logger.info("WebEBusinessAccountService  calling: " + "http://EBUSINESS-SERVICE" + "/eBusinessAccount/findById/{IdNumber}");
+		return restTemplate.getForObject("http://EBUSINESS-SERVICE" + "/eBusinessAccount/findById/{IdNumber}",
+				eBusAccount.class, IdNumber);
+	}
+	
+	public eBusAccount findByEAccountNumber(String eBNumber){
+		logger.info("findByEAccountNumber() invoked: for " + eBNumber);
+		logger.info("WebEBusinessAccountService  calling: " + "http://EBUSINESS-SERVICE" + "/eBusinessAccount/{eBNumber}");
+		return restTemplate.getForObject("http://EBUSINESS-SERVICE" + "/eBusinessAccount/{eBNumber}",
+				eBusAccount.class, eBNumber);
 	}
 
 }

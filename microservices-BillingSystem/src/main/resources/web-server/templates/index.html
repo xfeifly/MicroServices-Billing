@@ -24,7 +24,8 @@
 			href="http://localhost:1111/eureka/apps/">http://localhost:1111/eureka/apps/</a></li>
 		<li>Fetch account #123456789: <a th:href="@{/accounts/123456789}">/accounts/123456789</a></li>
 		<li>Fetch by name: <a th:href="@{/accounts/owner/Keri}">/accounts/owner/Keri</a></li>
-        <li>Check eBusiness Account: #1231 <a th:href="@{/eBusinessAccount/1231}">/eBusinessAccount/1231</a></li>
+        <li>Check eBusiness Account by User ID Number: #1235 <a th:href="@{/eBusinessAccount/findById/1235}">Find By UserID: 1235</a></li>
+   	    <li>Check eBusiness Account by e-Business Account Number: #123456789 <a th:href="@{/eBusinessAccount/123456789}">Find By e-Business Account: 123456789</a></li>
     	<li>Account <a th:href="@{/accounts/search}">Search</a></li>
 	</ul>
 

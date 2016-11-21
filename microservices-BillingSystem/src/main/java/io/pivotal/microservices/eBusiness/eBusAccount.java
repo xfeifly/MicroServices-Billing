@@ -50,8 +50,50 @@ public class eBusAccount implements Serializable{
 		balance = BigDecimal.ZERO;
 	}
 	
-	public long getId() {
+
+
+	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getEnumber() {
+		return enumber;
+	}
+
+	public void setEnumber(String enumber) {
+		this.enumber = enumber;
+	}
+
+	public String getIdnumber() {
+		return idnumber;
+	}
+
+	public void setIdnumber(String idnumber) {
+		this.idnumber = idnumber;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static void setNextId(Long nextId) {
+		eBusAccount.nextId = nextId;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 
 	/**
@@ -60,25 +102,7 @@ public class eBusAccount implements Serializable{
 	 * @param id
 	 *            The new id.
 	 */
-	protected void setId(long id) {
-		this.id = id;
-	}
 
-	public String getNumber() {
-		return enumber;
-	}
-
-	protected void setNumber(String accountNumber) {
-		this.enumber = accountNumber;
-	}
-
-	public String getOwner() {
-		return owner;
-	}
-
-	protected void setOwner(String owner) {
-		this.owner = owner;
-	}
 
 	public BigDecimal getBalance() {
 		return balance.setScale(2, BigDecimal.ROUND_HALF_EVEN);

@@ -24,7 +24,7 @@ public abstract class AbstractAccountControllerTests {
 		Account account = accountController.byNumber(ACCOUNT_1);
 
 		Assert.assertNotNull(account);
-		Assert.assertEquals(ACCOUNT_1, account.getNumber());
+		Assert.assertEquals(ACCOUNT_1, account.getIdnumber());
 		Assert.assertEquals(ACCOUNT_1_NAME, account.getOwner());
 		LOGGER.info("End validAccount test");
 	}
@@ -40,7 +40,7 @@ public abstract class AbstractAccountControllerTests {
 		Assert.assertEquals(1, accounts.size());
 
 		Account account = accounts.get(0);
-		Assert.assertEquals(ACCOUNT_1, account.getNumber());
+		Assert.assertEquals(ACCOUNT_1, account.getIdnumber());
 		Assert.assertEquals(ACCOUNT_1_NAME, account.getOwner());
 		LOGGER.info("End validAccount test");
 	}
@@ -55,7 +55,7 @@ public abstract class AbstractAccountControllerTests {
 		Assert.assertEquals(1, accounts.size());
 
 		Account account = accounts.get(0);
-		Assert.assertEquals(ACCOUNT_1, account.getNumber());
+		Assert.assertEquals(ACCOUNT_1, account.getIdnumber());
 		Assert.assertEquals(ACCOUNT_1_NAME, account.getOwner());
 		LOGGER.info("End validAccount test");
 	}
@@ -70,7 +70,7 @@ public abstract class AbstractAccountControllerTests {
 		Assert.assertEquals(1, accounts.size());
 
 		Account account = accounts.get(0);
-		Assert.assertEquals(ACCOUNT_1, account.getNumber());
+		Assert.assertEquals(ACCOUNT_1, account.getIdnumber());
 		Assert.assertEquals(ACCOUNT_1_NAME, account.getOwner());
 		LOGGER.info("End validAccount test");
 	}

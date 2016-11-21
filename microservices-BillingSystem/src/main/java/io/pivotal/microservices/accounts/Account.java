@@ -59,34 +59,40 @@ public class Account implements Serializable {
 		balance = BigDecimal.ZERO;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * Set JPA id - for testing and JPA only. Not intended for normal use.
-	 * 
-	 * @param id
-	 *            The new id.
-	 */
-	protected void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getNumber() {
+	public String getIdnumber() {
 		return idnumber;
 	}
 
-	protected void setNumber(String accountNumber) {
-		this.idnumber = accountNumber;
+	public void setIdnumber(String idnumber) {
+		this.idnumber = idnumber;
 	}
 
 	public String getOwner() {
 		return owner;
 	}
 
-	protected void setOwner(String owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static void setNextId(Long nextId) {
+		Account.nextId = nextId;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 
 	public BigDecimal getBalance() {

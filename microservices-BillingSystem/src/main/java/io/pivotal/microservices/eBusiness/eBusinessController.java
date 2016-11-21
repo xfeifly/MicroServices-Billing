@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.logging.Logger;
 import org.springframework.http.*;
 //import org.apache.commons.collections.keyvalue.TiedMapEntry;
@@ -38,14 +37,6 @@ public class eBusinessController {
 	public eBusinessController(EbusAccountRepository ebusAccountRepository) {
 		this.testMap = new HashMap<Integer, Integer>();
 		this.ebusAccountRepository = ebusAccountRepository;
-		
-//		Random rand = new Random();
-//		for(int i  = 0; i < 10; i++){
-//			testMap.put(1230 + i, rand.nextInt(1000));
-//		}
-//
-//		logger.info("eBusinessController says system has "
-//				+ testMap.size() + " eBusiness accounts");
 	}
 	
 	
@@ -56,13 +47,6 @@ public class eBusinessController {
 		logger.info("eBusinessAccounts-service byNumber() invoked: " + accountNumber);
 		
 		eBusAccount ebtest = ebusAccountRepository.findByEnumber(accountNumber);
-		
-//		eBusAccount ebtest = new eBusAccount();
-//		ebtest.setId((long)1);
-//		ebtest.setOwner("Jerry");
-//		ebtest.setNumber("1231");
-//		Random rand = new Random();
-//		ebtest.balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);				
 		logger.info("eBusinessAccounts-service byNumber() found: " + ebtest);
 		if (ebtest == null)
 			throw new AccountNotFoundException(accountNumber);
@@ -77,14 +61,7 @@ public class eBusinessController {
 
 		logger.info("eBusinessAccounts-service byNumber() invoked: " + IdNumber);
 		
-		eBusAccount ebtest = ebusAccountRepository.findByIdnumber(IdNumber);
-		
-//		eBusAccount ebtest = new eBusAccount();
-//		ebtest.setId((long)1);
-//		ebtest.setOwner("Jerry");
-//		ebtest.setNumber("1231");
-//		Random rand = new Random();
-//		ebtest.balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);				
+		eBusAccount ebtest = ebusAccountRepository.findByIdnumber(IdNumber);		
 		logger.info("eBusinessAccounts-service byENumber() found: " + ebtest);
 		if (ebtest == null)
 			throw new AccountNotFoundException(IdNumber);
@@ -92,6 +69,13 @@ public class eBusinessController {
 			return ebtest;
 		}
 	}
+	
+	
+//	@RequestMapping("/eBusinessAccount/fetchEaccountInfo")
+//	public String EBInfoByIdNumber(@PathVariable("IdNumber") String IdNumber){
+//		logger.info("ebusiness account EBInfoByIdNumber is invoked");
+//		
+//	}
 	
 	//find all eB account
 	@RequestMapping("/eBusinessAccount/findAll")
@@ -101,13 +85,6 @@ public class eBusinessController {
 		
 		ArrayList<eBusAccount> ebtest = ebusAccountRepository.findAll();
 		
-//		eBusAccount ebtest = new eBusAccount();
-//		ebtest.setId((long)1);
-//		ebtest.setOwner("Jerry");
-//		ebtest.setNumber("1231");
-//		Random rand = new Random();
-//		ebtest.balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);				
-		//logger.info("eBusinessAccounts-service byENumber() found: " + ebtest);
 		if (ebtest == null)
 			throw new Exception();
 		else {
@@ -115,7 +92,6 @@ public class eBusinessController {
 		}
 	}
 	 
-	
 	//updata ebusiness account balance
 	@RequestMapping("/eBusinessAccount/updata/{eBusinessNumber}")
 	public eBusAccount updataDB(@PathVariable("eBusinessNumber") String EBNumber){
@@ -139,9 +115,10 @@ public class eBusinessController {
 				logger.info("balance not enough!");
 				return new ResponseEntity<String>("Balance is not enough!", HttpStatus.BAD_REQUEST);
 			}else{ // updata database
-				MathContext mc = new MathContext(2);
+				logger.info("Balance is enough! order will be paid!");
+				MathContext mc = new MathContext(7);
 				BigDecimal newBalance = ebtest.getBalance().subtract(orderprice, mc);
-				logger.info("");
+				logger.info(newBalance.toString());
 				ebusAccountRepository.updateEbusAccountById(id, newBalance);
 			}
 		}else{

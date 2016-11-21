@@ -32,15 +32,26 @@ public class WebEBusinessAccountsController {
 //	}
 	
 	///eBusinessService Controller
-	@RequestMapping(value = "/eBusinessAccount/{eBusinessAccountNumber}")
+	@RequestMapping(value = "/eBusinessAccount/findById/{IdNumber}")
 	public String ebusbyNumber(Model model,
-			@PathVariable("eBusinessAccountNumber") String eBusinessAccountNumber) {
+			@PathVariable("IdNumber") String IdNumber) {
 
-		logger.info("webEBusinessAccountController findByNumber() invoked: " + eBusinessAccountNumber);
+		logger.info("webEBusinessAccountController findByNumber() invoked: " + IdNumber);
 
-		eBusAccount account = EBaccountsService.findByNumber(eBusinessAccountNumber);
-//		eBusAccount EBaccount = EBaccountsService.findByNumber(eBusinessAccountNumber);
+		eBusAccount account = EBaccountsService.findByNumber(IdNumber);
 		logger.info("webEBusinessAccountController findByNumber() found: " + account);
+		model.addAttribute("eBusAccount", account);
+		return "eBusAccount";
+	}
+	
+	@RequestMapping(value = "/eBusinessAccount/{EbusNumber}")
+	public String ebusbyEBNumber(Model model,
+			@PathVariable("EbusNumber") String EbusNumber) {
+
+		logger.info("webEBusinessAccountController findByNumber() invoked: " + EbusNumber);
+
+		eBusAccount account = EBaccountsService.findByEAccountNumber(EbusNumber);
+		logger.info("webEBusinessAccountController findByEAccountNumber() found: " + EbusNumber);
 		model.addAttribute("eBusAccount", account);
 		return "eBusAccount";
 	}

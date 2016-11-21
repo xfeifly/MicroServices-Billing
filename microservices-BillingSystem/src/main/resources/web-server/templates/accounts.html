@@ -29,8 +29,8 @@
 			<tbody>
 				<tr th:each="account : ${accounts}">
 					<td><a href="account.html"
-						th:href="@{|/accounts/${account.number}|}"
-						th:text="|${account.number}|">11111111</a></td>
+						th:href="@{|/accounts/${account.idnumber}|}"
+						th:text="|${account.idnumber}|">11111111</a></td>
 					<td th:text="${account.owner}">Owner</td>
 					<td th:text="${account.balance}">0</td>
 				</tr>

@@ -69,9 +69,8 @@ public class AccountsController {
 	public ArrayList<Account> findAll() throws Exception{
 		logger.info("finAll() method in AccountController is invoked!");
 		
-		for(int i = 1234; i <= 1254; i++){
-			
-		}
+
+		
 		
 		ArrayList<Account> allrets = accountRepository.findAll();
 		
