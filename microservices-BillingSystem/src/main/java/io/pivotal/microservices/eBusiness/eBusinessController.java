@@ -78,8 +78,8 @@ public class eBusinessController {
 //	}
 	
 	//find all eB account
-	@RequestMapping("/eBusinessAccount/findAll")
-	public ArrayList<eBusAccount> findAll() throws Exception {
+	@RequestMapping(value = "/eBusinessAccount/findAll", method=RequestMethod.GET)
+	public @ResponseBody ArrayList<eBusAccount> findAll() throws Exception {
 
 		logger.info("eBusinessAccounts-service findAll() invoked: ");
 		

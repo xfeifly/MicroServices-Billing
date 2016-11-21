@@ -4,8 +4,11 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.RestTemplate;
 
 import io.pivotal.microservices.services.accounts.AccountsServer;
 
@@ -26,7 +29,14 @@ class AccountsMain {
 		System.setProperty("spring.config.name", "accounts-server");
 		SpringApplication.run(AccountsMain.class, args);
 	}
+	
+	@LoadBalanced
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 }
+
 
 /**
  * Spring Integration/System test - by using @SpringApplicationConfiguration

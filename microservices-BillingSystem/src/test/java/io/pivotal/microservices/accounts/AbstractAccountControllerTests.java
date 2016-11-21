@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.web.client.RestTemplate;
 
 import io.pivotal.microservices.exceptions.AccountNotFoundException;
 
@@ -15,6 +17,10 @@ public abstract class AbstractAccountControllerTests {
 	protected static final String ACCOUNT_1_NAME = "Keri Lee";
 	private static Logger LOGGER = Logger.getLogger("InfoLogging");
 
+	@Autowired
+	@LoadBalanced
+	protected RestTemplate restTemplate;
+	
 	@Autowired
 	AccountsController accountController;
 
