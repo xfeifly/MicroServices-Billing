@@ -68,13 +68,21 @@ public class AccountsController {
 	@RequestMapping("/accounts/showAll")
 	public ArrayList<Account> findAll() throws Exception{
 		logger.info("finAll() method in AccountController is invoked!");
+		
+		for(int i = 1234; i <= 1254; i++){
+			
+		}
+		
 		ArrayList<Account> allrets = accountRepository.findAll();
+		
+		
 		if (allrets == null)
 			throw new Exception();
 		else {
 			return allrets;
 		}
  	}
+	
 	/**
 	 * Fetch accounts with the specified name. A partial case-insensitive match
 	 * is supported. So <code>http://.../accounts/owner/a</code> will find any
