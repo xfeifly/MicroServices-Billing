@@ -15,9 +15,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
 import io.pivotal.microservices.order.MyOrderConfiguration;
+import io.pivotal.microservices.order.MyOrderController;
 import io.pivotal.microservices.order.MyOrderRepository;
 import io.pivotal.microservices.order.MyOrderService;
-import io.pivotal.microservices.services.web.WebAccountsService;
+import io.pivotal.microservices.services.web.WebAccountsController;
 
 /**
  * Run as a micro-service, registering with the Discovery Server (Eureka).
@@ -36,7 +37,7 @@ public class MyOrderServer {
 	public static final String MYORDER_SERVICE_URL = "http://ORDER-SERVICE";
 
 	@Autowired
-	protected MyOrderRepository orderRepository;//BUG
+	protected MyOrderRepository orderRepository;
 
 	protected Logger logger = Logger.getLogger(MyOrderServer.class.getName());
 
@@ -72,7 +73,12 @@ public class MyOrderServer {
 	 * @return A new service instance.
 	 */
 	@Bean
-	public MyOrderService accountsService() {
+	public MyOrderService myOrderService() {
 		return new MyOrderService(MYORDER_SERVICE_URL);
 	}
+	
+//	@Bean
+//	public MyOrderController myOrderController() {
+//		return new MyOrderController(orderRepository, myOrderService());
+//	}
 }

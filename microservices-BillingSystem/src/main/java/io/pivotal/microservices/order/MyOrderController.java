@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.pivotal.microservices.exceptions.MyOrderNotFoundException;
+import io.pivotal.microservices.services.web.eBusAccount;
 
 
 
@@ -112,9 +113,9 @@ public class MyOrderController {
 		
 		//sending http put request;
 		boolean result = myOrderService.payOrder(usrId, price);
+		
 		if (result) {
 			logger.info("order-service payOrder() succeed: " + orderId);
-			
 		} else {
 			logger.info("order-service payOrder() failed: " + orderId);
 		}

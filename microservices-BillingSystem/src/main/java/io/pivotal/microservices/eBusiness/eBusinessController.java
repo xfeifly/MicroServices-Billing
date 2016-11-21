@@ -5,11 +5,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
-
+import org.springframework.http.*;
+//import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.bouncycastle.asn1.crmf.PKIPublicationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.netflix.discovery.converters.Auto;
@@ -110,6 +117,13 @@ public class eBusinessController {
 		
 		eBusAccount ebtest = ebusAccountRepository.findByIdnumber(EBNumber); 
 		return ebtest;
+	}
+	
+	//pay order
+	@RequestMapping(value = "/eBusinessAccount/payorder/{userId}", method = RequestMethod.PUT)
+	public ResponseEntity<String> tryToPay(@PathVariable("userId") String userId, @RequestBody HashMap<String, String> input){
+		logger.info("eBusiness service received:" + userId + input.get("prices"));
+		return 	new ResponseEntity<String>("this is a string", HttpStatus.OK);
 	}
 	
 }
