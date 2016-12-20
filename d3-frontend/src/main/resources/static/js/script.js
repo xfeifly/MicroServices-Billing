@@ -12,13 +12,7 @@ $(function() {
         $('body').addClass('firefox');
     }
 
-//    d3.json(config.jsonUrl, function(data) {
-//        if (data.errors.length) {
-//            alert('Data error(s):\n\n' + data.errors.join('\n'));
-//            return;
-//        }
-//    });
-    getValues("f872f5743b0db8d1");
+    getValues("b9ca34e0866a85ae");
     
     
     $('#docs-close').on('click', function() {
@@ -39,10 +33,8 @@ $(function() {
 
 
 function getValues(traceId) {
-	console.log("test");
     var result = {};
   $.ajax('http://localhost:9411/api/v1/trace/' + traceId, {
-// $.ajax('http://localhost:9411/api/v1/traces', {
   type: 'GET',
   async: 'false',
   dataType: 'json'
@@ -118,9 +110,7 @@ function drawGraph() {
                   source : graph.data[obj.parentId],
                   target : obj
               };
-//        	 link.strength = (link.source.duration|| 1)
-//        	 		* (link.target.duration || 1);
-        	link.strength = 23;
+        	link.strength = 3;
         	 graph.links.push(link);
         }
 
@@ -143,9 +133,6 @@ function drawGraph() {
             cat = graph.categories[key] = {
                 key      : key,
                 type     : null ,//obj.type,
-//                typeName : (config.types[obj.type]
-//                            ? config.types[obj.type].short
-//                            : obj.type),
                 type	 : key,
                 group    : key, //obj.group,
                 count    : 0

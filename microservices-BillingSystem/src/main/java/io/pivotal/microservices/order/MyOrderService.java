@@ -46,9 +46,6 @@ public class MyOrderService {
 				usrId + " price:" + price);
 		
 		String url = "http://EBUSINESS-SERVICE/eBusinessAccount/payorder/{usrId}";      //URL 
-//	    String accountId = 2l;
-//	    String requestBody = "{\"status\":\"testStatus2\"}";
-		 
 		HashMap<String, String> requestBody1 = new HashMap<String, String>();
 //		String requestBody1 = usrId + ";" + price.toString();
 		requestBody1.put("userId", usrId);
