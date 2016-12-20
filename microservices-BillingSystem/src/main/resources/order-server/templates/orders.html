@@ -37,8 +37,14 @@
 		
 					
 					<td>
-						<form  th:action="@{/orders/users/${order.id}}" th:method="put">
+						<form  th:action="@{|/orders/pay/${order.id}|}" th:method="put">
       					<button type="submit" name="submit" value="value" class="link-button">Pay</button>
+   						</form> 
+					</td>
+					<td>
+						<!--  <form  th:action="@{'/orders/users/{id}'(id = @{order.usrId})}" th:method="get"> -->
+						<form  th:action="@{|/orders/users/${order.usrId}|}" th:method="get">
+      					<button type="submit" name="submit" value="value" class="link-button">Pay-GET</button>
    						</form> 
 					</td>
 				</tr>
