@@ -12,12 +12,6 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
-
-
-
-
 public interface MyOrderRepository extends Repository<MyOrder, Long>{
 	
 	@Query("SELECT count(*) from MyOrder")

@@ -42,6 +42,7 @@ public class eBusinessController {
 	@Autowired
 	private SpanAccessor accessor;
 	
+	
 	@Autowired
 	public eBusinessController(EbusAccountRepository ebusAccountRepository) {
 		this.testMap = new HashMap<Integer, Integer>();

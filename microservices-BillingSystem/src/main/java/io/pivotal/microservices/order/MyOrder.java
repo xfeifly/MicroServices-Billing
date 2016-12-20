@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Persistent account entity with JPA markup. Accounts are stored in an H2
+ * Persistent order entity with JPA markup. Accounts are stored in an H2
  * relational database.
  * 
  */

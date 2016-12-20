@@ -13,3 +13,6 @@ server:
 spring:
   thymeleaf:
     enabled: false     # Disable Thymeleaf 
+  application:
+     name: registration-service  # Service registers under this name
+    

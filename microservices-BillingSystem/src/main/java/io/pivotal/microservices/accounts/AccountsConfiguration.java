@@ -18,11 +18,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
-/**
- * The accounts Spring configuration.
- * 
- * @author Paul Chapman
- */
 @Configuration
 @ComponentScan
 @EntityScan("io.pivotal.microservices.accounts")
@@ -35,11 +30,6 @@ public class AccountsConfiguration {
 	public AccountsConfiguration() {
 		logger = Logger.getLogger(getClass().getName());
 	}
-
-	/**
-	 * Creates an in-memory "rewards" database populated with test data for fast
-	 * testing
-	 */
 	@Bean
 	public DataSource dataSource() {
 		logger.info("dataSource() invoked");
@@ -55,16 +45,6 @@ public class AccountsConfiguration {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Map<String, Object>> accounts = jdbcTemplate.queryForList("SELECT idnumber FROM T_ACCOUNT");
 		logger.info("System has " + accounts.size() + " accounts");
-
-		// Populate with random balances
-//		Random rand = new Random();
-//
-//		for (Map<String, Object> item : accounts) {
-//			String number = (String) item.get("idnumber");
-//			BigDecimal balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
-//			jdbcTemplate.update("UPDATE T_ACCOUNT SET balance = ? WHERE idnumber = ?", balance, number);
-//		}
-
 		return dataSource;
 	}
 }

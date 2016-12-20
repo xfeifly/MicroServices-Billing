@@ -6,11 +6,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
-/**
- * Repository for Account data implemented using Spring Data JPA.
- * 
- * @author Paul Chapman
- */
 public interface AccountRepository extends Repository<Account, Long> {
 	/**
 	 * Find an account with the specified account number.
