@@ -10,11 +10,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-/**
- * Persistent account entity with JPA markup. Accounts are stored in an H2
- * relational database.
- * 
- */
 @JsonRootName("MyOrder")
 public class MyOrder implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -32,13 +27,6 @@ public class MyOrder implements Serializable{
 	
 	private String payStatus;//"unpaid" "paid" "processing"
 	
-	/**
-	 * This is a very simple, and non-scalable solution to generating unique
-	 * ids. Not recommended for a real application. Consider using the
-	 * <tt>@GeneratedValue</tt> annotation and a sequence to generate ids.
-	 * 
-	 * @return The next available id.
-	 */
 	protected static Long getNextId() {
 		synchronized (nextId) {
 			return nextId++;

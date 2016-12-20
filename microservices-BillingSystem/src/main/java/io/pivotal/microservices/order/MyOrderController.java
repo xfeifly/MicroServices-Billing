@@ -145,9 +145,10 @@ public class MyOrderController {
 	}
 
 	@RequestMapping(value = "/orders/pay/{orderId} ", method = RequestMethod.PUT) 
-	public void payOrderByOrderId(@PathVariable("orderId") Long orderId) {
-		
+	public String payOrderByOrderId(@PathVariable("orderId") String OrderId) {
 		//find orderId
+		Long orderId = Long.valueOf(OrderId);
+		logger.info("In myorder service: " + orderId);
 		logger.info("order-service payOrderByOrderId() invoked: " + orderId);
 		MyOrder myorder = myOrderRepository.findByid(orderId);
 		logger.info("order-service payOrderByOrderId() found: " + myorder);
@@ -167,6 +168,8 @@ public class MyOrderController {
 			logger.info("order-service payOrder() failed: " + orderId + " not paid");
 			myOrderRepository.updateStatusToUnsuccessful(orderId);
 		}
+//		return "payOrderResult";
+		return "result";
 		
 	}
 		

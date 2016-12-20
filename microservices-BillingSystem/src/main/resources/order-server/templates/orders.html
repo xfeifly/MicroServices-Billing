@@ -33,13 +33,9 @@
 					<td th:text="${order.name}">Unknown</td>
 					<td th:text="${order.price}">0.0</td>
 					<td th:text="${order.payStatus}">Unpaid</td>
-					
-		
-					
 					<td>
-						<form  th:action="@{|/orders/pay/${order.id}|}" th:method="put">
+						<form  th:action="@{|/orders/pay/${order.id}|}" th:method="put"> </form>>
       					<button type="submit" name="submit" value="value" class="link-button">Pay</button>
-   						</form> 
 					</td>
 					<td>
 						<!--  <form  th:action="@{'/orders/users/{id}'(id = @{order.usrId})}" th:method="get"> -->

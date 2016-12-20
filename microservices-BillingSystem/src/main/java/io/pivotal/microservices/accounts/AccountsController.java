@@ -19,11 +19,6 @@ import io.pivotal.microservices.eBusiness.EbusAccountRepository;
 import io.pivotal.microservices.eBusiness.eBusAccount;
 import io.pivotal.microservices.exceptions.*;
 
-/**
- * A RESTFul controller for accessing account information.
- * 
- * @author Paul Chapman
- */
 @RestController
 public class AccountsController {
 

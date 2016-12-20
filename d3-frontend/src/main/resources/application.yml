@@ -1,0 +1,8 @@
+server:
+  port: 3300
+
+spring:
+  application:
+    name: d3FrontendApp
+ 
+   

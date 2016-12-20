@@ -4,34 +4,44 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.logging.Logger;
 import org.springframework.http.*;
 //import org.apache.commons.collections.keyvalue.TiedMapEntry;
-import org.bouncycastle.asn1.crmf.PKIPublicationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import com.netflix.discovery.converters.Auto;
-
-import antlr.collections.List;
+import org.springframework.cloud.sleuth.Span;
+import org.springframework.cloud.sleuth.SpanAccessor;
+import org.springframework.cloud.sleuth.Tracer;
+import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import io.pivotal.microservices.exceptions.AccountNotFoundException;
 
 
 @RestController
 public class eBusinessController {
-	protected Logger logger = Logger.getLogger(eBusinessController.class
-			.getName());
+//	protected Logger logger = Logger.getLogger(eBusinessController.class
+//			.getName());
+	private static final Log logger = LogFactory.getLog(eBusinessController.class);
 	protected HashMap<Integer, Integer> testMap;
 	
 	protected EbusAccountRepository ebusAccountRepository; 
+	private Random random = new Random();
+
+	@Autowired
+	private Tracer tracer;
+	@Autowired
+	private SpanAccessor accessor;
+	
 	
 	@Autowired
 	public eBusinessController(EbusAccountRepository ebusAccountRepository) {
@@ -42,12 +52,20 @@ public class eBusinessController {
 	
 	//find eBaccount by eB number
 	@RequestMapping("/eBusinessAccount/{eBusAccountNumber}")
-	public eBusAccount byNumber(@PathVariable("eBusAccountNumber") String accountNumber) {
-
+	public eBusAccount byNumber(@PathVariable("eBusAccountNumber") String accountNumber) throws InterruptedException {
+		Span span = this.tracer.createSpan("http:customTraceEndpoint",
+				new AlwaysSampler());
+		int millis = this.random.nextInt(1000);
+		logger.info(String.format("Sleeping for [%d] millis at byNumber", millis));
+		Thread.sleep(millis);
+		this.tracer.addTag("random-sleep-millis", String.valueOf(millis));
 		logger.info("eBusinessAccounts-service byNumber() invoked: " + accountNumber);
-		
 		eBusAccount ebtest = ebusAccountRepository.findByEnumber(accountNumber);
 		logger.info("eBusinessAccounts-service byNumber() found: " + ebtest);
+		this.tracer.addTag("random-sleep-millis", String.valueOf(1000));
+
+		this.tracer.close(span);
+
 		if (ebtest == null)
 			throw new AccountNotFoundException(accountNumber);
 		else {

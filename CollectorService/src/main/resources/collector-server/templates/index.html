@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Microservices Monitor System</h1>
+
+	<p>Collector Server is running.</p>
+	
+	<p>
+		Generate the First Trace JSON Object<a href="/collector/generateFirstTrace">Generate First Trace JSON</a>
+	</p>
+	<p>
+		Delete All data from three tables<a href="/collector/deleteAllData">Delete ALL DATA!</a>
+	</p>
+	<p>
+		Click to collect all span_data from MySql database<a href="/collector/retriveAllSpans">Retrieve All spans</a>.
+	</p>
+	<p>
+		Click to collect all annotation_data from MySql database<a href="/collector/retriveAllAnnotations">Retrieve All annotations</a>.
+	</p>
+	<p>
+		Click to collect all dependencies_data from MySql database<a href="/collector/retriveAllDependencies">Retrieve All dependencies</a>.
+	</p>
+	
+	<h3>Spring Boot URLs</h3>
+	<p>For those interested, Spring Boot provides RESTful URLs for
+		interrogating your application (they return JSON format data):</p>
+
+	<ul>
+		<li><a th:href="@{/beans}">The beans</a></li>
+		<li><a th:href="@{/env}">The environment</a></li>
+		<li><a th:href="@{/health}">Application health</a></li>
+		<li><a th:href="@{/metrics}">Application metrics</a></li>
+		<li><a th:href="@{/trace}">Request call trace</a></li>
+	</ul>
+
+	<div th:replace="footer :: copy"></div>
+
+</body>
+</html>
